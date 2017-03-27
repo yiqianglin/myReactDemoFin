@@ -4,14 +4,14 @@ import './../stylesheets/components/IndexPage-tab.less';
 class Tab extends React.Component{
 	constructor(props) {
 		super(props);
+		//默认选中
 		this.state = { index: 0 };
 	}
-	handleClick(e) {
-		this.setState({ index:  ++ this.state.index })
-		console.log(this.state)
+	handleClick(index) {
+		console.log("index:", index+1);
 	}
 	assembleClassName(commonName, dynamicName, index){
-
+		return commonName + dynamicName + index > 9 ? index : ("0" + index);
 	}
 	render(){
 		const data = [
@@ -24,8 +24,6 @@ class Tab extends React.Component{
 		return(
 		/*注释一*/
 		//注释二
-
-
 			<div className="wrapper">
 				<div className="mission_wp viewport">
 					<ul className="items clearfix">
@@ -35,9 +33,9 @@ class Tab extends React.Component{
 						      'btn-pressed': this.state.isPressed,
 						      'btn-over': !this.state.isPressed && this.state.isHovered
 						    });*/
-						 	return <li className="item" onClick={this.handleClick.bind(this)} key={item.id}>
+						 	return <li className="item" onClick={this.handleClick.bind(this, index)} key={item.id}>
 								<a href="javascript:void(0);" className="tab-href">
-									<span className={"icon", "icon-0"+(index+1)}></span>
+									<span className={`icon icon-0${index+1}`}></span>
 									<span className="cont">
 										<span className="tit">{item.tit}</span>
 					                    <span className="txt">{item.txt}</span>
