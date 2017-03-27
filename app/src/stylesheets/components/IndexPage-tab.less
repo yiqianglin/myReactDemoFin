@@ -1,0 +1,125 @@
+.mission_wp{
+	position: relative;
+
+	.item{
+	    position: relative;
+	    float: left;
+	    width: 20%;
+	    height: 80px;
+	    background: #ff464e;
+	    -webkit-transition: .3s;
+	    transition: .3s;
+		.tab-href{
+		    display: block;
+    		height: 100%;
+			.icon{
+			    position: absolute;
+			    width: 80px;
+			    height: 80px;
+			    .icon-bg{	/*构造类*/
+				    background: url(../../images/index/icons_normal.png) no-repeat;
+			    }
+			    .icon-bg();
+				.generate-icon(6);
+				.generate-icon(@n, @i:1) when (@i =< @n){
+					&.icon-0@{i}{
+						background-position: -(80px*((@i)-1))  0;
+					}
+					.generate-icon(@n, (@i + 1));
+				}
+			}
+			.cont{
+				display: block;
+			    padding: 16px 0 0 75px;
+			    .tit{
+	    	    	color: #e41e27;
+    				font-size: 16px;
+    				display: block;
+    				margin-bottom: 10px;
+			    }
+			    .txt{
+				    display: block;
+				    color: #ffbabd;
+				    overflow: hidden;
+				    text-overflow: ellipsis;
+				    white-space: nowrap;
+				    font-size: 12px;
+			    }
+			}
+			.mark_new{
+			    position: absolute;
+			    right: 5%;
+			    top: 0;
+			    width: 27px;
+			    height: 27px;
+			    overflow: hidden;
+			    line-height: 27;
+			    background: url(../../images/index/index_spr24.png) no-repeat -150px -150px;
+			        zoom: .75;
+		        color: #e41e27;
+		        &:after{
+					content: "";
+				    position: absolute;
+				    left: 0;
+				    top: 0;
+				    width: 100%;
+				    height: 100%;
+				    background: url(../../images/index/index_spr24.png) no-repeat -100px -200px;
+					-webkit-animation: jump 2s infinite;
+						animation: jump 2s infinite;
+		        }
+			}
+			&:hover{
+				background: #ff636a;
+				.icon{
+			    	background-position-y: -100px;
+				}
+				&:after{
+					display: none;
+				};
+			}
+			&:after{
+			    content: "";
+			    position: absolute;
+			    z-index: 1;
+			    right: -1px;
+			    top: 18px;
+			    width: 1px;
+			    height: 64%;
+			    background: #e41e27;
+			};
+		}
+		&.clicked{		/*--选中--*/
+			.tab-href{
+				background: #fff;
+				.icon{
+				    background-position-y: -100px;
+				}
+				&:after{
+					display: none;
+				};				
+			}
+		}
+	}
+}
+.mission_cont{
+	position: relative;
+    height: 290px;
+    background: #fff;
+    overflow: hidden;
+
+}
+
+
+/*animate*/
+@-webkit-keyframes jump {
+	0%,6%,12%,18%,24%,30%,100%{-webkit-transform:translateY(0);}
+	3%,15%,27%{-webkit-transform:translateY(-5%);}
+	9%,21%{-webkit-transform:translateY(5%);}
+}
+@keyframes jump {
+	0%,6%,12%,18%,24%,30%,100%{transform:translateY(0);}
+	3%,15%,27%{transform:translateY(-5%);}
+	9%,21%{transform:translateY(5%);}
+}
+

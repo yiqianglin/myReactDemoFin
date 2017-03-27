@@ -1,0 +1,12 @@
+.carousel{position: relative; height: 405px;}
+.carousel li{display: none; position: absolute; left: 0; top: 0; width: 100%; height: 100%}
+.carousel .img_wp{display: block; margin: 0 auto; width: 100%; height: 100%;}
+.carousel .img_wp img{display: block; width: 100%;}
+.carousel li.on{display: block;}
+
+.carousel .pic_guide{position: absolute; z-index: 10; left: 0; bottom: 5.56%; width: 100%; text-align: center;font-size: 0;}
+.pic_guide .dot{position: relative; display: inline-block; width: 94px; height: 36px; line-height: 36px; color: #fff; font-size: 13px; -webkit-transition:all .3s; transition:all .3s; cursor: pointer; vertical-align: middle;  font-style: normal;}
+.pic_guide .dot:after{content: ""; position: absolute; left: 5px; bottom: 0; width: 89%; height: 2px; background: #000; -webkit-transition:all .3s; transition:all .3s; filter: alpha(opacity=40); opacity: .4;}
+.pic_guide .dot.on{background: rgba(255,255,255,.2);}
+.pic_guide .dot.on:after,.pic_guide .dot:hover:after{left: 0; width:100%; background: #fff; filter: alpha(opacity=90); opacity: .9;}
+.pic_guide .dot.off:after { content: '' !important; }

@@ -1,0 +1,266 @@
+body{
+	min-width: 900px;
+}
+ul,ol{
+	padding: 0;
+	list-style: none;
+}
+*{
+	margin: 0;
+	padding: 0;
+}
+.wrapper-bg{
+	position: absolute;
+	width: 100%;
+	min-width: 1200px;
+    height: 960px;
+	background: url(../images/index/bg.jpg) no-repeat center top;
+	top: 0;
+	z-index: 0;
+}
+.viewport{
+	width: 900px;
+	margin: 0 auto;
+}
+
+.wrapper{
+	width: 900px;
+	height: 3000px;
+	margin: 0 auto;
+}
+
+.clearfix{
+	zoom: 1;
+}
+.clearfix:after{
+	clear: both;
+	content: " ";
+	zoom: 1;
+	height: 0;
+	display: block;
+	visibility: hidden;
+}
+a{
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.ban_top{
+	position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: url(../images/index/bg_hd.png);
+    border-bottom: none;
+    margin-bottom: 0;
+    height: 70px;
+    .logo{
+	    width: auto;
+	    height: auto;
+	    float: left;
+		.viplogo {
+		    display: block;
+		    width: 180px;
+		    height: 70px;
+		    overflow: hidden;
+		    background: url(../images/index/logo_hd.png) no-repeat center;
+		}
+    }
+    .menu{
+    	float: left;
+    	.menu-ul{
+    		padding: 16px 0;
+    		li{
+			    float: left;
+			    display: inline;
+			    position: relative;
+			    margin-right: 30px;
+			    color: #fff;
+			    transition: .3s;
+    		}
+    		.mid_link{
+				height: 37px;
+			    line-height: 37px;
+			    border-radius: 5px;
+			    text-align: center;
+			    display: inline-block;
+			    position: relative;
+			    color: #fff;
+			    color: #fff;
+			    border-radius: 0;
+			    transition: .3s;
+			    font-size: 14px;
+    		}
+    	}
+    }
+    .top-right{
+    	float: right;
+    	padding-top: 16px;
+    }
+    .unlogin{
+	    display: inline-block;
+	    width: 35px;
+	    height: 35px;
+	    border: 2px solid #fff;
+	    border-radius: 100%;
+	    background: url(../images/index/bg_base_spr24.png) no-repeat -100px 0;
+	    vertical-align: middle;
+	    margin-right: 10px;
+    }
+    .username{
+	    display: inline-block;
+	    color: #fff;
+	    -webkit-transition: .3s;
+	    transition: .3s;
+	    height: 39px;
+	    line-height: 39px;
+	    font-size: 14px;
+    }
+}
+
+
+.carousel{position: relative; height: 405px;}
+.carousel li{display: none; position: absolute; left: 0; top: 0; width: 100%; height: 100%}
+.carousel .img_wp{display: block; margin: 0 auto; width: 100%; height: 100%;}
+.carousel .img_wp img{display: block; width: 100%;}
+.carousel li.on{display: block;}
+
+.carousel .pic_guide{position: absolute; z-index: 10; left: 0; bottom: 5.56%; width: 100%; text-align: center;font-size: 0;}
+.pic_guide .dot{position: relative; display: inline-block; width: 94px; height: 36px; line-height: 36px; color: #fff; font-size: 13px; -webkit-transition:all .3s; transition:all .3s; cursor: pointer; vertical-align: middle;  font-style: normal;}
+.pic_guide .dot:after{content: ""; position: absolute; left: 5px; bottom: 0; width: 89%; height: 2px; background: #000; -webkit-transition:all .3s; transition:all .3s; filter: alpha(opacity=40); opacity: .4;}
+.pic_guide .dot.on{background: rgba(255,255,255,.2);}
+.pic_guide .dot.on:after,.pic_guide .dot:hover:after{left: 0; width:100%; background: #fff; filter: alpha(opacity=90); opacity: .9;}
+.pic_guide .dot.off:after { content: '' !important; }
+
+.carousel .btn_arrow_wp a{position: absolute; top: 50%; margin-top: 3px; width: 33px; height: 64px; overflow: hidden; line-height: 64; background: url(../img-y16/index/index_spr24.png) no-repeat 0 0;z-index: 2;}
+.carousel a.btn_prev{left: -114px;}
+.carousel a.btn_prev:hover{background-position: -50px 0;}
+.carousel a.btn_next{right: -114px; background-position: -150px 0;}
+.carousel a.btn_next:hover{background-position: -100px 0;}
+
+.mission_wp{
+	position: relative;
+
+	.item{
+	    position: relative;
+	    float: left;
+	    width: 20%;
+	    height: 80px;
+	    background: #ff464e;
+	    -webkit-transition: .3s;
+	    transition: .3s;
+		.tab-href{
+		    display: block;
+    		height: 100%;
+			.icon{
+			    position: absolute;
+			    width: 80px;
+			    height: 80px;
+			    .icon-bg{	/*构造类*/
+				    background: url(../images/index/icons_normal.png) no-repeat;
+			    }
+			    .icon-bg();
+				.generate-icon(6);
+				.generate-icon(@n, @i:1) when (@i =< @n){
+					&.icon-0@{i}{
+						background-position: -(80px*((@i)-1))  0;
+					}
+					.generate-icon(@n, (@i + 1));
+				}
+			}
+			.cont{
+				display: block;
+			    padding: 16px 0 0 75px;
+			    .tit{
+	    	    	color: #e41e27;
+    				font-size: 16px;
+    				display: block;
+    				margin-bottom: 10px;
+			    }
+			    .txt{
+				    display: block;
+				    color: #ffbabd;
+				    overflow: hidden;
+				    text-overflow: ellipsis;
+				    white-space: nowrap;
+				    font-size: 12px;
+			    }
+			}
+			.mark_new{
+			    position: absolute;
+			    right: 5%;
+			    top: 0;
+			    width: 27px;
+			    height: 27px;
+			    overflow: hidden;
+			    line-height: 27;
+			    background: url(../images/index/index_spr24.png) no-repeat -150px -150px;
+			        zoom: .75;
+		        color: #e41e27;
+		        &:after{
+					content: "";
+				    position: absolute;
+				    left: 0;
+				    top: 0;
+				    width: 100%;
+				    height: 100%;
+				    background: url(../images/index/index_spr24.png) no-repeat -100px -200px;
+					-webkit-animation: jump 2s infinite;
+						animation: jump 2s infinite;
+		        }
+			}
+			&:hover{
+				background: #ff636a;
+				.icon{
+			    	background-position-y: -100px;
+				}
+				&:after{
+					display: none;
+				};
+			}
+			&:after{
+			    content: "";
+			    position: absolute;
+			    z-index: 1;
+			    right: -1px;
+			    top: 18px;
+			    width: 1px;
+			    height: 64%;
+			    background: #e41e27;
+			};
+		}
+		&.clicked{		/*--选中--*/
+			.tab-href{
+				background: #fff;
+				.icon{
+				    background-position-y: -100px;
+				}
+				&:after{
+					display: none;
+				};				
+			}
+		}
+	}
+}
+.mission_cont{
+	position: relative;
+    height: 290px;
+    background: #fff;
+    overflow: hidden;
+
+}
+
+
+/*animate*/
+@-webkit-keyframes jump {
+	0%,6%,12%,18%,24%,30%,100%{-webkit-transform:translateY(0);}
+	3%,15%,27%{-webkit-transform:translateY(-5%);}
+	9%,21%{-webkit-transform:translateY(5%);}
+}
+@keyframes jump {
+	0%,6%,12%,18%,24%,30%,100%{transform:translateY(0);}
+	3%,15%,27%{transform:translateY(-5%);}
+	9%,21%{transform:translateY(5%);}
+}
+
