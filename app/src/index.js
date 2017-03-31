@@ -1,10 +1,10 @@
 import { AppContainer } from 'react-hot-loader'; // required  
 import React from 'react';  
-import {render} from 'react-dom';  
-//import App from './containers/App.js'; // App
+import ReactDOM from 'react-dom';  
+import App from './containers/App.js'; // App
 import IndexPage from './containers/IndexPage.js';
 
-renderWithHotReload(IndexPage);
+/*renderWithHotReload(IndexPage);
 
 // Hot Module Replacement API
 if (module.hot) {
@@ -20,3 +20,19 @@ function renderWithHotReload(IndexPage) {
     , document.getElementById('starter')
   );
 }
+*/
+
+const renderWithHotReload = (Component) => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('starter')
+  );
+};
+
+renderWithHotReload(App);
+
+module.hot.accept('./containers/App.js', () => {
+  renderWithHotReload(App)
+});

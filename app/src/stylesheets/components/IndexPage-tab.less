@@ -1,6 +1,5 @@
 .mission_wp{
 	position: relative;
-
 	.item{
 	    position: relative;
 	    float: left;
@@ -107,7 +106,13 @@
     height: 290px;
     background: #fff;
     overflow: hidden;
-
+	.tab-content{
+		height: 100%;
+		display: none;
+		&.show{
+			display: block;
+		}
+	}
 }
 
 
@@ -123,3 +128,56 @@
 	9%,21%{transform:translateY(5%);}
 }
 
+
+
+/*mission_cashback*/
+.mission_cashback{}
+.cashback_left{float: left; position: relative; z-index: 2; margin: 3.5% 2.92% 0 2.5%; padding-top: 2.92%; width: 19.33%; height: 185px; background: #fff5d6; border-radius: 8px;}
+.cashback_left:after{content: ""; position: absolute; left: 50%; top: 10.91%; margin-left: -21.55%; width: 43.1%; height: 5%; background: #d39f00; border-radius: 6px;}
+.corner_mark{position: absolute; z-index: 2; left: 0; top: 0; width: 53px; height: 53px; overflow: hidden; line-height: 53; background: url(../../images/index/spr24_cashback.png);}
+.corner_mark_1{background-position: 0 -150px;}
+.corner_mark_2{background-position: -75px -150px;}
+.corner_mark_3{background-position: -150px -150px;}
+.cashback_left .coin{position: absolute; z-index: 1; left: 65px; top: -9.4%; width: 80px; height: 80px; background: url(../../images/index/index_spr24.png) 0 -150px; font: bold 24px/80px arial; text-align: center; color: #a68400; zoom: .83;}
+.cashback_left .cont{position: relative; z-index: 1; padding-top: 8.62%; background: #fff5d6; text-align: center;}
+.cashback_left .money{margin-left: 5px; color: #e41e27; font-weight: bold;}
+.cashback_left .money em{font: 24px/1.5 arial;}
+.cashback_left .tit .mark{display: inline-block; padding: 0 5px; margin-left: 6px; height: 16px; line-height: 16px; color: #fff; font-size: 12px; background: #ffca00; border-radius: 2px;}
+.cashback_left .txt{font-size: 12px;}
+.cashback_left .btn_wp{margin-top: 9.91%;}
+.cashback_left .btn_wp .btn_red{margin-bottom: 6px;}
+.cashback_left .btn_wp .tip{position: relative; font-size: 12px;}
+.cashback_left .btn_wp .tip .line{margin: 0 6px; color: #b1b1b1;}
+.cashback_left .ico_tip_wp{position: absolute; z-index: 1; display: inline-block; right: 14.22%; top: 1px;}
+.cashback_left .pop_tip{display: none; position: absolute; padding: 17px 20px; left: 20px; bottom: -24px; width: 153px; background: #fff; border-radius: 2px; text-align: left; box-shadow: 0 0 5px rgba(0,0,0,.22); border-radius: 3px;}
+.cashback_left .ico_tip_wp:hover .pop_tip{display: block;}
+.cashback_left .pop_tip dt{margin-bottom: 3px;}
+.cashback_left .pop_tip dd{padding-left: 13px; line-height: 19px; font-size: 12px; text-indent: -13px;}
+.mission_cashback .func_wp{float: left; margin-top: 3.5%; width: 74.25%; overflow: hidden;}
+.mission_cashback .func{float: left; position: relative; margin-right: 2.39%; width: 30.64%; height: 218px; border: 1px solid #f3f3f3; border-radius: 4px;}
+.mission_cashback .func .cont{position: relative; z-index: 1; padding: 14.29% 0 0 7.33%;}
+.mission_cashback .func .tit{margin-bottom: 5px; font-size: 24px;}
+.mission_cashback .func .txt{width: 7.5em; color: #8b8b8b;}
+.mission_cashback .func .link_go{position: absolute; z-index: 1; left: 0; bottom: 0; width: 100%; height: 100%; font-size: 18px;}
+.mission_cashback .func .link_go span{position: absolute; left: 7.33%;
+    bottom: 24.31%; font-size: 18px;}
+.mission_cashback .func:before{content: ""; position: absolute; left: 45.42%; top: 17.89%; width: 134px; height: 134px; background: url(../../images/index/spr24_cashback.png) no-repeat; -webkit-transition:.3s; transition: .3s;}
+.mission_cashback .func_double:before{background-position: -150px 0;}
+.mission_cashback .func_duobao:before{background-position: -300px 0;}
+.mission_cashback .func:hover:before{-webkit-transform: rotate(5deg);transform: rotate(5deg);}
+
+.cashback_left .coin.down{-webkit-animation: coin_down .8s both;}
+a.btn_red,a.btn_yellow{display: inline-block; height: 41px; line-height: 41px; color: #fff; font-size: 16px; border-radius: 21px; background: #e41e27; transition: background .2s; text-align: center;min-width: 103px;padding: 0 20px;}
+@-webkit-keyframes coin_down{
+	0%{-webkit-transform: translateY(0) rotate(0);transform: translateY(0) rotate(0)}
+	100%{-webkit-transform: translateY(100%) rotate(-360deg);transform: translateY(100%) rotate(-360deg)}
+}
+.cashback_left .coin.up{-webkit-animation: coin_up .6s both;}
+@-webkit-keyframes coin_up{
+	0%{-webkit-transform: translateY(100%) rotate(-360deg);transform: translateY(100%) rotate(-360deg)}
+	90%{-webkit-transform: translateY(-5%) rotate(0);transform: translateY(-5%) rotate(0)}
+	100%{-webkit-transform: translateY(0) rotate(0);transform: translateY(0) rotate(0)}
+}
+
+.ico_tip{display: inline-block; width: 12px; height: 12px; background: url(../../images/index/bg_base_spr24.png) no-repeat -150px -50px;}
+.ico_tip:hover{background-position: -150px -75px;}

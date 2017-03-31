@@ -12,7 +12,6 @@ export default class IndexPage extends React.Component{
 		return(
 			<div className="wrapper">
 				<div className="wrapper-bg"></div>
-				<NavBar/>
 				<Banner/>
 				<Tab selectedIndex="0"/>
 			</div>
