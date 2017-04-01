@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Link, Route, Redirect } from 'react-router-dom';
 import './../stylesheets/components/NavBar-top.less';
 
 class Navbar extends React.Component {
@@ -11,12 +12,13 @@ class Navbar extends React.Component {
 				<a className="viplogo" href="http://vip.xunlei.com/index.html?referfrom=pic" title="迅雷会员"></a>
 			</div>
 			<div className="menu">
+
 				<ul className="menu-ul clearfix">
 					<li data-index="1" className="cur">
-						<a title="首页" href="/index.html" className="mid_link">首页</a>
+						<Link to={'/IndexPage'} className="mid_link">首页</Link>
 					</li>
 					<li data-index="2">
-						<a title="功能特权" href="/vip_service/freedom/" className="mid_link">功能特权</a>
+						<Link to={'/MyPage'} className="mid_link">功能特权</Link>
 					</li>
 				    <li data-index="4">
 				    	<a title="美女特权" className="mid_link" href="/vip_service/beauty/">美女特权</a>
@@ -32,8 +34,9 @@ class Navbar extends React.Component {
 			    		</a>
 			    	</li>
 				</ul>
+
 			</div>
-			<div className="top-right">
+			<div className="top-right" onClick={this.props.handler_loginPanelShow}>
 				<span className="unlogin"></span>
 				<span className="username">立即登录</span>
 			</div>
