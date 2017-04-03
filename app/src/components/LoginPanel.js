@@ -5,9 +5,30 @@ class LoginPanel extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			logined: false,
+            loginStatus: {
+			    logined: false,
+                loginType: 'username_password', //phone_captcha
+                username: '',
+                password: '',
+                phone: '',
+                captcha: ''
+
+            }
 		}
 	}
+
+    formInputHandler = {
+        username: (event) => {
+            let state = this.state.loginStatus
+            state.username = event.target.value
+            this.setState({loginStatus:state});
+        },
+        password: (event) => {
+            let state = this.state.loginStatus
+            state.password = event.target.value
+            this.setState({loginStatus:state});
+        }
+    }
 
 
 	render(){
@@ -45,11 +66,11 @@ class LoginPanel extends React.Component{
           <form action="" className="form_logoin">
             <p className="in_box_cite color_red" style={{display:'none'}} id="al_warn"></p>
             <div className="in_box">
-              <label id="al_u_l" htmlFor="al_u">请输入迅雷帐号</label>
-              <input type="text" value="" className="in_txt" id="al_u"/></div>
+              <label id="al_u_l" htmlFor="al_u" style={{display: this.state.loginStatus.username ? 'none' : 'block'}}>请输入迅雷帐号</label>
+              <input type="text" value={this.state.loginStatus.username} onChange={this.formInputHandler.username} className="in_txt" id="al_u"/></div>
             <div className="in_box">
-              <label id="al_p_l" htmlFor="al_p">密码</label>
-              <input type="password" value="" className="in_txt" id="al_p"/></div>
+              <label id="al_p_l" htmlFor="al_p" style={{display: this.state.loginStatus.password ? 'none' : 'block'}}>密码</label>
+              <input type="password" value={this.state.loginStatus.password} onChange={this.formInputHandler.password} className="in_txt" id="al_p"/></div>
             <div className="in_box in_boxa" style={{display:'none'}} id="al_c_div">
               <label id="al_c_l" htmlFor="al_c">请输入验证码</label>
               <input type="text" value="" className="in_txt" id="al_c"/>
@@ -58,7 +79,7 @@ class LoginPanel extends React.Component{
             </div>
             <div className="in_box in_boxa" style={{display:'block'}}>
               <label id="al_remember_div" htmlFor="al_remember" className="cbox">
-                <input type="checkbox" id="al_remember" name="" className="chk" checked="checked"/>下次自动登录</label>
+                <input type="checkbox" id="al_remember" name="" className="chk" defaultChecked/>下次自动登录</label>
               <a href="http://aq.xunlei.com/password_find.html" title="忘记密码？" target="_blank" className="text_cite">忘记密码？</a></div>
             <div className="pay_btn">
               <a id="al_submit" className="" title="登录" href="javascript:void(0)">登录</a></div>
@@ -80,13 +101,13 @@ class LoginPanel extends React.Component{
               <input type="text" value="" className="in_txt" id="pl_c"/>
               <a href="javascript:void(0)" title="" className="verify_img">
                 <img id="pl_c_img" height="44" width="112" src="" alt=""/></a>
-              <p style={{display:'block', 'font-size': '11px', 'padding-top': '5px'}}>出于安全考虑，请输入上图中字符并验证</p>
+              <p style={{display:'block', 'fontSize': '11px', 'paddinTop': '5px'}}>出于安全考虑，请输入上图中字符并验证</p>
               <div className="pay_btn">
                 <a id="pl_gc" className="" title="确定">确定</a></div>
             </div>
             <div className="in_box in_boxa pl_hide_for_sms_captcha" style={{display:'block'}}>
               <label id="ml_remember_div" htmlFor="ml_remember" className="cbox">
-                <input type="checkbox" id="ml_remember" name="" className="chk" checked="checked"/>下次自动登录</label>
+                <input type="checkbox" id="ml_remember" name="" className="chk" defaultChecked/>下次自动登录</label>
               <a href="http://aq.xunlei.com/password_find.html" title="忘记密码？" target="_blank" className="text_cite">忘记密码？</a></div>
             <div className="pay_btn pl_hide_for_sms_captcha">
               <a id="ml_submit" className="" title="登录" href="javascript:void(0)">登录</a></div>
