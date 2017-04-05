@@ -16,6 +16,7 @@ export default class IndexPage extends React.Component{
 
 
 	render(){
+        console.log('IndexPage render')
 		return(
 			<div className="wrapper">
 				<div className="wrapper-bg"></div>

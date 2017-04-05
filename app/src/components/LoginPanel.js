@@ -11,11 +11,30 @@ class LoginPanel extends React.Component{
                 username: '',
                 password: '',
                 phone: '',
-                captcha: ''
-
+                captcha: '',
+                autoLogin: true,
             }
 		}
 	}
+
+	changeLoginType = (event) => {
+        let state = this.state.loginStatus
+        state.loginType = event.target.id
+        this.setState({loginStatus:state});
+    }
+
+	validator = {
+        captcha: {
+            uncomplete: /^[A-Za-z\d]{0,4}$/,
+            complete: /^[A-Za-z\d]{4}$/,
+        },
+        username: {
+            complete: /^\w{6,12}$/
+        },
+        password: {
+            complete: /^[.]{6,12}$/
+        }
+    }
 
     formInputHandler = {
         username: (event) => {
@@ -27,11 +46,63 @@ class LoginPanel extends React.Component{
             let state = this.state.loginStatus
             state.password = event.target.value
             this.setState({loginStatus:state});
+        },
+        captcha: (event) => {
+            let value = event.target.value;
+            if(value.length < 4){
+                if(!this.validator.captcha.uncomplete.test(value)){
+                    console.log(value)
+                    return false;
+                }
+            }else{
+                if(!this.validator.captcha.complete.test(value)){
+                    console.log(value)
+                    return false;
+                }
+            }
+            let state = this.state.loginStatus;
+            state.captcha = value;
+            this.setState({captcha:state});
+        },
+        autoLogin: (event) => {
+            console.log(this.state.loginStatus.autoLogin)
+            this.setState((prevState) => {
+                let state = prevState.loginStatus
+                state.autoLogin = !state.autoLogin
+                console.log('newstate:', state.autoLogin)
+                return {loginStatus:state}
+            });
+        },
+        common: (event) => {
+            let state = this.state.loginStatus,
+                 name = event.target.name;
+            state[name] = event.target.value;
+            this.setState({name: state});
+            console.log(this.state.loginStatus)
+        }
+    }
+
+    submitHandler = {
+        username_password: (event) => {
+            console.log(this.state.loginStatus.logined)
+            console.log(this.state.loginStatus.loginType)
+            console.log(this.state.loginStatus.username)
+            console.log(this.state.loginStatus.password)
+            console.log(this.state.loginStatus.phone)
+            console.log(this.state.loginStatus.captcha)
+            console.log(this.state.loginStatus.autoLogin)
+            if(!this.validator.username.complete.test(this.state.loginStatus.username)){
+                console.log('用户名不通过')
+                this.props.handler_showPopTips({
+                    msg: '请输入正确的用户名'
+                });
+            }
         }
     }
 
 
 	render(){
+        console.log('LoginPannle render')
 		const isShow = this.props.show
 		return (
 			isShow ? (
@@ -55,38 +126,35 @@ class LoginPanel extends React.Component{
     <div id="login_box" className="tb_wpb">
       <div className="hd">
         <h3>
-          <a id="al_tab" href="javascript:void(0)" className="on" title="">帐号登录</a>
-          <a id="ml_tab" href="javascript:void(0)" className="" title="">短信登录</a></h3>
+          <a id="username_password" href="javascript:void(0)" className={this.state.loginStatus.loginType=="username_password"?"on":null} onClick={this.changeLoginType}>帐号登录</a>
+          <a id="phone_captcha" href="javascript:void(0)" className={this.state.loginStatus.loginType=="phone_captcha"?"on":null} onClick={this.changeLoginType}>短信登录</a></h3>
       </div>
-      <div className="safe_login_alert" style={{display:'none'}}>您的账号
-        <em>安全风险极高</em>，请使用手机登录</div>
       <div className="bd bd_bg">
         {/*--普通登录--*/}
-        <div className="input_area" id="account_login">
+        <div className={`input_area ${this.state.loginStatus.loginType=="username_password" ? 'show' : 'hide'}`} id="account_login">
           <form action="" className="form_logoin">
-            <p className="in_box_cite color_red" style={{display:'none'}} id="al_warn"></p>
             <div className="in_box">
               <label id="al_u_l" htmlFor="al_u" style={{display: this.state.loginStatus.username ? 'none' : 'block'}}>请输入迅雷帐号</label>
-              <input type="text" value={this.state.loginStatus.username} onChange={this.formInputHandler.username} className="in_txt" id="al_u"/></div>
+              <input type="text" value={this.state.loginStatus.username} onChange={this.formInputHandler.common} className="in_txt" id="al_u" name="username"/></div>
             <div className="in_box">
               <label id="al_p_l" htmlFor="al_p" style={{display: this.state.loginStatus.password ? 'none' : 'block'}}>密码</label>
-              <input type="password" value={this.state.loginStatus.password} onChange={this.formInputHandler.password} className="in_txt" id="al_p"/></div>
-            <div className="in_box in_boxa" style={{display:'none'}} id="al_c_div">
-              <label id="al_c_l" htmlFor="al_c">请输入验证码</label>
-              <input type="text" value="" className="in_txt" id="al_c"/>
+              <input type="password" value={this.state.loginStatus.password} onChange={this.formInputHandler.common} className="in_txt" id="al_p" name="password"/></div>
+            <div className="in_box in_boxa"    id="al_c_div">
+              <label id="al_c_l" htmlFor="al_c" style={{display: this.state.loginStatus.captcha ? 'none' : 'block'}}>请输入验证码</label>
+              <input type="text" value={this.state.loginStatus.captcha} onChange={this.formInputHandler.captcha} className="in_txt" id="al_c" name="captcha"/>
               <div href="javascript:void(0)" title="验证码" className="verify_img">
-                <img id="al_c_img" height="44" width="90" src="" alt=""/></div>
+                <img id="al_c_img"  src="" alt=""/></div>
             </div>
             <div className="in_box in_boxa" style={{display:'block'}}>
               <label id="al_remember_div" htmlFor="al_remember" className="cbox">
-                <input type="checkbox" id="al_remember" name="" className="chk" defaultChecked/>下次自动登录</label>
+                <input type="checkbox" id="al_remember" name="" className="chk" checked={this.state.loginStatus.autoLogin} onChange={this.formInputHandler.autoLogin}/>下次自动登录</label>
               <a href="http://aq.xunlei.com/password_find.html" title="忘记密码？" target="_blank" className="text_cite">忘记密码？</a></div>
             <div className="pay_btn">
-              <a id="al_submit" className="" title="登录" href="javascript:void(0)">登录</a></div>
+              <a id="al_submit" className="" title="登录" href="javascript:void(0)" onClick={this.submitHandler.username_password}>登录</a></div>
           </form>
         </div>
         {/*--手机登录--*/}
-        <div className="input_area" style={{display:'none'}} id="mobile_login">
+        <div className={`input_area ${this.state.loginStatus.loginType=="phone_captcha" ? 'show' : 'hide'}`} id="mobile_login">
           <form action="" className="form_logoin" id="pl_form">
             <p className="in_box_cite color_red" style={{display:'none'}} id="ml_warn"></p>
             <div className="in_box pl_hide_for_sms_captcha">

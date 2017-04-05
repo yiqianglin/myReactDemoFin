@@ -16,6 +16,7 @@ class Tab extends React.Component{
 		return commonName + dynamicName + index > 9 ? index : ("0" + index);
 	}
 	render(){
+		console.log('IndexPage-tab render')
 		const data = [
 			{id: "1", tit: '每日领钱', txt: '会员专享免费领', newMark: true, content: 'tab-content-01'},
 			{id: "2", tit: '福利券', txt: '生活福利领不停', newMark: true, content: 'tab-content-02'},
@@ -24,7 +25,6 @@ class Tab extends React.Component{
 			{id: "5", tit: '打卡', txt: '连续打卡领好礼', newMark: true, content: 'tab-content-05'},
 		];
 		var tab_content = "tab-content-" + (this.state.index > 9 ? this.state.index : `0${this.state.index}`)
-		console.log(tab_content)
 		return(
 		/*注释一*/
 		//注释

@@ -5,14 +5,12 @@ import NavBar from './../components/NavBar-top';
 import LoginPanel from './../components/LoginPanel';
 import IndexPage from './IndexPage';
 import MyPage from './MyPage';
+import {PopTips, PopData} from '../components/Pop-tips/index';
 
 
 
-import _appcontainer from './../stylesheets/common/normalize.css';
+import './../stylesheets/common/normalize.css';
 import './../stylesheets/index.less';
-
-
-
 
 class MaskLayer extends React.Component{
 	constructor(props){
@@ -34,10 +32,11 @@ export default class App extends React.Component{
 		super(props)
 		this.state = {
 			maskLayerIsShow: false,
-			loginPanelIsShow: false
+			loginPanelIsShow: false,
+			popData: new  PopData({/*show:true, msg:'default'*/})
 		}
-		this.maskLayerToggle = this.maskLayerToggle
-		this.loginPanelToggle = this.loginPanelToggle.bind(this)
+/*		this.maskLayerToggle = this.maskLayerToggle
+		this.loginPanelToggle = this.loginPanelToggle.bind(this)*/
 	}
 
 	handler = {
@@ -47,6 +46,14 @@ export default class App extends React.Component{
 		},
 		closeLoginPanel : () => {
 			this.loginPanelToggle()
+		},
+		showPopTips: (data) => {
+			let popData = {...data, show: true};
+			this.setState({popData: new PopData(popData)})
+		},
+		hidePopTips: (data) => {
+            let popData = {...data, show: false};
+            this.setState({popData: new PopData(popData)})
 		}
 	}
 
@@ -62,24 +69,24 @@ export default class App extends React.Component{
 			loginPanelIsShow: !prevState.loginPanelIsShow
 		}))
 		this.maskLayerToggle()
-		
 	}
-
-
 
 	render(){
 		return(
 			<div>
+				<PopTips data={this.state.popData}
+						 handler_hidePopTips={this.handler.hidePopTips}
+				/>
+				<MaskLayer show={this.state.maskLayerIsShow}/>
+				<LoginPanel ref="loginPanel" show={this.state.loginPanelIsShow}
+							closeLoginPanel={this.handler.closeLoginPanel}
+							handler_showPopTips={this.handler.showPopTips}
+				/>
+
 				<BrowserRouter>
 					<div>
-						<NavBar handler_loginPanelShow={this.handler.loginPanelIsShow}/>
-
-						<MaskLayer show={this.state.maskLayerIsShow}/>
-						<LoginPanel ref="loginPanel" show={this.state.loginPanelIsShow} closeLoginPanel={this.handler.closeLoginPanel}/>
-
-
-
-						<Route path="/" exact render={() => <Redirect to='/IndexPage' />} />						
+						<NavBar handler_loginPanelShow={this.handler.loginPanelIsShow} />
+						<Route path="/" exact render={() => <Redirect to='/IndexPage' />} />
 						<Route path="/IndexPage" component={IndexPage}  ref="indexPage"/>
 						<Route path="/MyPage" component={MyPage}  />
 
