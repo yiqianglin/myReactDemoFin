@@ -28,4 +28,14 @@ export default class IndexPage extends React.Component{
 			
 		)
 	}
+
+    shouldComponentUpdate(nextProps) {
+		console.log('shouldComponentUpdate:',nextProps);
+		console.log(this.props)
+		console.log(this.props == nextProps)
+        if (this.props == nextProps){
+        	return false
+		}
+		return true
+    }
 }

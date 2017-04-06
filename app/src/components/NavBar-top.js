@@ -5,6 +5,7 @@ import './../stylesheets/components/NavBar-top.less';
 class Navbar extends React.Component {
   render() {
     //const {isload, maxLoops} = this.props
+      console.log('navbar render')
     return (
     <div className="ban_top">
 		<div className="con viewport">

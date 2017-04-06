@@ -5,7 +5,7 @@ class PopData {
     constructor({
         icon = '',
         msg = 'data默认数据',
-        timeout = 3000,
+        timeout = 2000,
         callback = null,
         show = false
     }){

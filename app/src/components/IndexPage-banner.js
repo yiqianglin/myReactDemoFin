@@ -3,6 +3,7 @@ import './../stylesheets/components/IndexPage-banner.less';
 
 class Banner extends React.Component {
   render() {
+  	console.log('banner render')
     return (
 		<div className="carousel viewport">
 			<ul id="carousel" className="clearfix">

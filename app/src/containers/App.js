@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter, Link, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Link, Route, Redirect, HashRouter} from 'react-router-dom'
 import NavBar from './../components/NavBar-top';
 import LoginPanel from './../components/LoginPanel';
 import IndexPage from './IndexPage';
@@ -33,25 +33,35 @@ export default class App extends React.Component{
 		this.state = {
 			maskLayerIsShow: false,
 			loginPanelIsShow: false,
-			popData: new  PopData({/*show:true, msg:'default'*/})
+			popData: new  PopData({})
 		}
+
 /*		this.maskLayerToggle = this.maskLayerToggle
 		this.loginPanelToggle = this.loginPanelToggle.bind(this)*/
 	}
 
 	handler = {
 		loginPanelIsShow: () => {
-			console.log(this.refs.indexPage.props.component)
+			//console.log(this.refs.indexPage.props.component)
 			this.loginPanelToggle();
 		},
 		closeLoginPanel : () => {
 			this.loginPanelToggle()
 		},
 		showPopTips: (data) => {
-			let popData = {...data, show: true};
-			this.setState({popData: new PopData(popData)})
+		    console.log('====showPopTips====')
+			let popData = new PopData({...data, show: true});
+			this.setState({popData: popData})
+            //定时关闭
+            new Promise((resolve, reject)=> {
+                setTimeout(resolve, popData.timeout);
+            }).then(()=> {
+                console.log('关闭tips')
+                this.setState({popData: new PopData({})})
+            });
 		},
 		hidePopTips: (data) => {
+            console.log('====hidePopTips====')
             let popData = {...data, show: false};
             this.setState({popData: new PopData(popData)})
 		}
@@ -74,16 +84,25 @@ export default class App extends React.Component{
 	render(){
 		return(
 			<div>
-				<PopTips data={this.state.popData}
-						 handler_hidePopTips={this.handler.hidePopTips}
-				/>
-				<MaskLayer show={this.state.maskLayerIsShow}/>
-				<LoginPanel ref="loginPanel" show={this.state.loginPanelIsShow}
-							closeLoginPanel={this.handler.closeLoginPanel}
-							handler_showPopTips={this.handler.showPopTips}
-				/>
+                {this.state.popData.show ?(
+                    <PopTips data={this.state.popData}
+                             handler_hidePopTips={this.handler.hidePopTips}
+                    />
+                ): null}
 
-				<BrowserRouter>
+                {this.state.maskLayerIsShow ?(
+                    <MaskLayer show={this.state.maskLayerIsShow}/>
+                ): null}
+
+                {this.state.loginPanelIsShow ?(
+                    <LoginPanel ref="loginPanel" show={this.state.loginPanelIsShow}
+                                closeLoginPanel={this.handler.closeLoginPanel}
+                                handler_showPopTips={this.handler.showPopTips}
+                    />
+                ): null}
+
+				{/*<BrowserRouter>*/}
+				<HashRouter>
 					<div>
 						<NavBar handler_loginPanelShow={this.handler.loginPanelIsShow} />
 						<Route path="/" exact render={() => <Redirect to='/IndexPage' />} />
@@ -91,7 +110,8 @@ export default class App extends React.Component{
 						<Route path="/MyPage" component={MyPage}  />
 
 					</div>
-	        	</BrowserRouter>
+				</HashRouter>
+	        	{/*</BrowserRouter>*/}
         	</div>
 		)
 	}

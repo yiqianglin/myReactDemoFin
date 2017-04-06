@@ -29,13 +29,13 @@ class PopTips extends React.Component{
         )
     }
 
-/*    componentDidUpdate(){
+/*    componentWillUpdate (){
         let popData = this.props.data
         new Promise((resolve, reject)=> {
             setTimeout(resolve, popData.timeout);
         }).then(()=> {
             console.log('关闭tips')
-            //this.props.handler_hidePopTips();
+            this.props.handler_hidePopTips();
         });
     }*/
 }
