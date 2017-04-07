@@ -101,8 +101,8 @@ export default class App extends React.Component{
                     />
                 ): null}
 
-				{/*<BrowserRouter>*/}
-				<HashRouter>
+				<BrowserRouter>
+				{/*<HashRouter>*/}
 					<div>
 						<NavBar handler_loginPanelShow={this.handler.loginPanelIsShow} />
 						<Route path="/" exact render={() => <Redirect to='/IndexPage' />} />
@@ -110,8 +110,8 @@ export default class App extends React.Component{
 						<Route path="/MyPage" component={MyPage}  />
 
 					</div>
-				</HashRouter>
-	        	{/*</BrowserRouter>*/}
+				{/*</HashRouter>*/}
+	        	</BrowserRouter>
         	</div>
 		)
 	}
