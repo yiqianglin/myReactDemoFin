@@ -2,7 +2,7 @@
  * Created by cc on 2017/4/7.
  */
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Link, Route } from 'react-router-dom'
 
 
 export default class Demo extends React.Component{
@@ -15,17 +15,26 @@ export default class Demo extends React.Component{
     render(){
         return(
             <BrowserRouter
-                basename={"optionalString"}
-                forceRefresh={true}
+                basename={'/'}
+                forceRefresh={false}
                 getUserConfirmation={this.getConfirmation.bind(this, '确认一下吧', function(){console.log('sss')})}
                 keyLength={8}
             >
+                <div>
                 <Link to="/monday">monday</Link>
+                    <br/>
                 <Link to="/thusday">thusday</Link>
+                    <br/>
+                <Link to={{
+                    pathname: '/courses',
+                    search: '?sort=name',
+                    hash: '#the-hash',
+                    state: { fromDashboard: true }
+                }}>other</Link>
 
-                <Route path="/monday" render={() => <h3>monday</h3>}/>
-                <Route path="/thusday" render={() => <h3>thusday</h3>}/>
-                <div>skdfjkdjfk</div>
+                <Route path="/monday" render={() => <h1>monday</h1>}/>
+                <Route path="/thusday" render={() => <h1>thusday</h1>}/>
+                </div>
             </BrowserRouter>
         )
     }
