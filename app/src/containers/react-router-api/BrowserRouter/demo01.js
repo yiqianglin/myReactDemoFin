@@ -5,21 +5,28 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 
 
-class Demo extends React.Components{
-    render(){
+export default class Demo extends React.Component{
 
+    getConfirmation = (message, callback) => {
+        const allowTransition = window.confirm(message)
+        callback(allowTransition)
+    }
+
+    render(){
         return(
             <BrowserRouter
-                basename={optionalString}
-                forceRefresh={optionalBool}
-                getUserConfirmation={optionalFunc}
-                keyLength={optionalNumber}
+                basename={"optionalString"}
+                forceRefresh={true}
+                getUserConfirmation={this.getConfirmation.bind(this, '确认一下吧', function(){console.log('sss')})}
+                keyLength={8}
             >
+                <Link to="/monday">monday</Link>
+                <Link to="/thusday">thusday</Link>
+
+                <Route path="/monday" render={() => <h3>monday</h3>}/>
+                <Route path="/thusday" render={() => <h3>thusday</h3>}/>
                 <div>skdfjkdjfk</div>
             </BrowserRouter>
         )
-
     }
 }
-
-export default Demo
